@@ -1,6 +1,6 @@
 PODS:
   - EDColor (0.4.0)
-  - Masonry (0.6.1)
+  - Masonry (0.6.4)
   - ViewUtils (1.1.2)
 
 DEPENDENCIES:
@@ -9,8 +9,8 @@ DEPENDENCIES:
   - ViewUtils (~> 1.1)
 
 SPEC CHECKSUMS:
-  EDColor: bcdb8600b7a456f4408ce1d7e7fc001588919254
-  Masonry: 2cb49fd14d203d2db5ca6bb017135b235dde9980
-  ViewUtils: 11aaceb3b215b3d051c2f00ae143133a71095365
+  EDColor: 89d19a013279a5604d61650721c15f20fefaaf00
+  Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
+  ViewUtils: 68e42c708a4b3912e39691cef5080282dc5013fb
 
-COCOAPODS: 0.35.0
+COCOAPODS: 0.39.0

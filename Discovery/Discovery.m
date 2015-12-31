@@ -54,16 +54,18 @@
         _shouldAdvertise = NO;
         _shouldDiscover = NO;
         
+        NSLog(@"HERE! %d", (int)startOption);
+        
         switch (startOption) {
             case DIStartAdvertisingAndDetecting:
-                _shouldAdvertise = YES;
-                _shouldDiscover = YES;
+                self.shouldAdvertise = YES;
+                self.shouldDiscover = YES;
                 break;
             case DIStartAdvertisingOnly:
-                _shouldAdvertise = YES;
+                self.shouldAdvertise = YES;
                 break;
             case DIStartDetectingOnly:
-                _shouldDiscover = YES;
+                self.shouldDiscover = YES;
                 break;
             case DIStartNone:
             default:
@@ -220,7 +222,7 @@
         [self startDetecting];
     }
     else {
-        //NSLog(@"Central manager state: %d", central.state);
+        NSLog(@"Central manager state: %d", (int)central.state);
     }
 }
 
