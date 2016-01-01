@@ -54,8 +54,6 @@
         _shouldAdvertise = NO;
         _shouldDiscover = NO;
         
-        NSLog(@"HERE! %d", (int)startOption);
-        
         switch (startOption) {
             case DIStartAdvertisingAndDetecting:
                 self.shouldAdvertise = YES;
@@ -86,7 +84,6 @@
 }
 
 -(void)setShouldAdvertise:(BOOL)shouldAdvertise {
-    //NSLog(@"_shouldAdvertise == shouldAdvertise %d %d %d", _shouldAdvertise == shouldAdvertise, _shouldAdvertise, shouldAdvertise);
     if(_shouldAdvertise == shouldAdvertise)
         return;
     
@@ -320,11 +317,11 @@
      advertisementData:(NSDictionary *)advertisementData
                   RSSI:(NSNumber *)RSSI
 {
-    NSLog(@"User is discovered: %@ %@ at %@", peripheral.name, peripheral.identifier, RSSI);
+    //NSLog(@"User is discovered: %@ %@ at %@", peripheral.name, peripheral.identifier, RSSI);
     
     NSString *username = advertisementData[CBAdvertisementDataLocalNameKey];
 
-    NSLog(@"Discovered name : %@", username);
+    //NSLog(@"Discovered name : %@", username);
     
     BLEUser *bleUser = [self userWithPeripheralId:peripheral.identifier.UUIDString];
     if(bleUser == nil) {
@@ -337,7 +334,7 @@
         [self.usersMap setObject:bleUser forKey:bleUser.peripheralId];
     }
     
-    NSLog(@"BLUEUser is identified %d", bleUser.isIdentified);
+    //NSLog(@"BLUEUser is identified %d", bleUser.isIdentified);
     
     if(!bleUser.isIdentified) {
         // We check if we can get the username from the advertisement data,
