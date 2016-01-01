@@ -86,7 +86,7 @@
 }
 
 -(void)setShouldAdvertise:(BOOL)shouldAdvertise {
-    NSLog(@"_shouldAdvertise == shouldAdvertise %d %d %d", _shouldAdvertise == shouldAdvertise, _shouldAdvertise, shouldAdvertise);
+    //NSLog(@"_shouldAdvertise == shouldAdvertise %d %d %d", _shouldAdvertise == shouldAdvertise, _shouldAdvertise, shouldAdvertise);
     if(_shouldAdvertise == shouldAdvertise)
         return;
     
@@ -158,6 +158,8 @@
 }
 
 - (void)setPaused:(BOOL)paused {
+    
+    print("Pausing central manager scanning...");
     
     if(_paused == paused)
         return;
