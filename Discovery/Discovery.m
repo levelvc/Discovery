@@ -59,13 +59,17 @@
         switch (startOption) {
             case DIStartAdvertisingAndDetecting:
                 self.shouldAdvertise = YES;
+                _shouldAdvertise = YES;
                 self.shouldDiscover = YES;
+                _shouldDiscover = YES;
                 break;
             case DIStartAdvertisingOnly:
                 self.shouldAdvertise = YES;
+                _shouldAdvertise = YES;
                 break;
             case DIStartDetectingOnly:
                 self.shouldDiscover = YES;
+                _shouldDiscover = YES;
                 break;
             case DIStartNone:
             default:
@@ -82,6 +86,7 @@
 }
 
 -(void)setShouldAdvertise:(BOOL)shouldAdvertise {
+    NSLog(@"_shouldAdvertise == shouldAdvertise %d %d %d", _shouldAdvertise == shouldAdvertise, _shouldAdvertise, shouldAdvertise);
     if(_shouldAdvertise == shouldAdvertise)
         return;
     
