@@ -318,11 +318,11 @@
      advertisementData:(NSDictionary *)advertisementData
                   RSSI:(NSNumber *)RSSI
 {
-    //NSLog(@"User is discovered: %@ %@ at %@", peripheral.name, peripheral.identifier, RSSI);
+    NSLog(@"User is discovered: %@ %@ at %@", peripheral.name, peripheral.identifier, RSSI);
     
     NSString *username = advertisementData[CBAdvertisementDataLocalNameKey];
 
-    //NSLog(@"Discovered name : %@", name);
+    NSLog(@"Discovered name : %@", username);
     
     BLEUser *bleUser = [self userWithPeripheralId:peripheral.identifier.UUIDString];
     if(bleUser == nil) {
@@ -350,6 +350,8 @@
             // nope we could not get the username from CBAdvertisementDataLocalNameKey,
             // we have to connect to the peripheral and try to get the characteristic data
             // add we will extract the username from characteristics.
+            
+            NSLog(@"Connecting to peripheral (background)!");
             
             if(peripheral.state == CBPeripheralStateDisconnected) {
                 [self.centralManager connectPeripheral:peripheral options:nil];
