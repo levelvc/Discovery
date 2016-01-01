@@ -89,7 +89,12 @@
     
     if(shouldAdvertise) {
         if (!self.peripheralManager)
-            self.peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:self.queue];
+            //self.peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:self.queue];
+            // Advertise with restoration key
+            self.peripheralManager = [[CBPeripheralManager alloc]
+                                      initWithDelegate:self
+                                      queue:self.queue
+                                      options:@{ CBCentralManagerOptionRestoreIdentifierKey:@"attachedPeripheralManagerIdentifier" }];
     } else {
         if (self.peripheralManager) {
             [self.peripheralManager stopAdvertising];
@@ -204,7 +209,19 @@
 }
 
 - (void)peripheralManagerDidStartAdvertising:(CBPeripheralManager *)peripheral error:(NSError *)error {
-    
+    NSLog(@"peripheralManager peripheralManagerDidStartAdvertising");
+}
+
+- (void)peripheralManager:(CBPeripheralManager *)peripheral willRestoreState:(NSDictionary *)dict {
+    NSLog(@"peripheralManager willRestoreState");
+}
+
+- (void)peripheralManager:(CBPeripheralManager *)peripheral didReceiveReadRequest:(CBATTRequest *)request {
+    NSLog(@"peripheralManager didReceiveReadRequest");
+}
+
+- (void)peripheralManager:(CBPeripheralManager *)peripheral central:(CBCentral *)central didSubscribeToCharacteristic:(CBCharacteristic *)characteristic {
+    NSLog(@"peripheralManager didSubscribeToCharacteristic %@", central.identifier.UUIDString);
 }
 
 - (void)peripheralManagerDidUpdateState:(CBPeripheralManager *)peripheral {
