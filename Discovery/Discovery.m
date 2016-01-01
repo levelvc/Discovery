@@ -393,7 +393,7 @@
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error
 {
     //BLEUser *user = [self userWithPeripheralId:peripheral.identifier.UUIDString];
-    //NSLog(@"Did discover characteristics of: %@ - %@", user.username, service.characteristics);
+    NSLog(@"Did discover characteristics of: %@", service.characteristics);
     
     if (!error) {
         // loop through to find our characteristic
@@ -410,7 +410,7 @@
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
     NSString *valueStr = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
-    //NSLog(@"CBCharacteristic updated value: %@", valueStr);
+    NSLog(@"CBCharacteristic updated value: %@", valueStr);
     
     // if the value is not nil, we found our username!
     if(valueStr != nil) {
