@@ -159,7 +159,7 @@
 
 - (void)setPaused:(BOOL)paused {
     
-    print("Pausing central manager scanning...");
+    NSLog(@"Pausing central manager scanning...");
     
     if(_paused == paused)
         return;
