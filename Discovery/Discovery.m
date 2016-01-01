@@ -194,9 +194,16 @@
                                             value:[self.username dataUsingEncoding:NSUTF8StringEncoding]
                                       permissions:CBAttributePermissionsReadable];
     
+    CBMutableCharacteristic *dynamicReadCharacteristic =
+    [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:@"8363BECA-88C4-4EFB-9CAB-6815562BCECD"]
+                                       properties:CBCharacteristicPropertyRead
+                                            value:nil
+                                      permissions:CBAttributePermissionsReadable];
+    
+    
     // create the service with the characteristics
     CBMutableService *service = [[CBMutableService alloc] initWithType:self.uuid primary:YES];
-    service.characteristics = @[characteristic];
+    service.characteristics = @[characteristic, dynamicReadCharacteristic];
     [self.peripheralManager addService:service];
     
     [self.peripheralManager startAdvertising:advertisingData];
@@ -403,6 +410,10 @@
             if ([characteristic.UUID isEqual:self.uuid]) {
                 [peripheral readValueForCharacteristic:characteristic];
                 //[peripheral setNotifyValue:YES forCharacteristic:characteristic];
+            }
+            if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:@"8363BECA-88C4-4EFB-9CAB-6815562BCECD"]]) {
+                NSLog(@"Reading dynamic characteristic!");
+                [peripheral readValueForCharacteristic:characteristic];
             }
         }
     }
