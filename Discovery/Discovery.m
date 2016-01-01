@@ -395,7 +395,6 @@
 
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error
 {
-    //BLEUser *user = [self userWithPeripheralId:peripheral.identifier.UUIDString];
     NSLog(@"Did discover characteristics of: %@", service.characteristics);
     
     if (!error) {
