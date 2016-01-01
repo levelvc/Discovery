@@ -335,6 +335,8 @@
         [self.usersMap setObject:bleUser forKey:bleUser.peripheralId];
     }
     
+    NSLog(@"BLUEUser is identified %d", bleUser.isIdentified);
+    
     if(!bleUser.isIdentified) {
         // We check if we can get the username from the advertisement data,
         // in case the advertising peer application is working at foreground
