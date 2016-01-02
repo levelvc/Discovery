@@ -198,7 +198,7 @@
     [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:@"8363BECA-88C4-4EFB-9CAB-6815562BCECD"]
                                        properties:CBCharacteristicPropertyWriteWithoutResponse
                                             value:nil
-                                      permissions:CBAttributePermissionsReadable];
+                                      permissions:CBAttributePermissionsWriteable];
     
     
     // create the service with the characteristics
@@ -232,6 +232,7 @@
 }
 
 - (void)peripheralManager:(CBPeripheralManager *)peripheral didReceiveWriteRequests:(NSArray *)requests {
+    NSLog(@"peripheralManager:%@ didReceiveWriteRequests:%@", peripheral, requests);
     CBATTRequest *req = [requests objectAtIndex:0];
     NSData *val = req.value;
     NSLog(@"Got write value %@", val);
@@ -419,7 +420,7 @@
             }
             if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:@"8363BECA-88C4-4EFB-9CAB-6815562BCECD"]]) {
                 NSLog(@"Reading dynamic characteristic!");
-                [peripheral readValueForCharacteristic:characteristic];
+                //[peripheral readValueForCharacteristic:characteristic];
                 // TODO: Perhaps write the central's userid
                 [peripheral writeValue:[self.username dataUsingEncoding:NSUTF8StringEncoding]
                                         forCharacteristic:characteristic type:CBCharacteristicWriteWithoutResponse];
