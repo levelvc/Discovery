@@ -231,6 +231,12 @@
     NSLog(@"peripheralManager didReceiveReadRequest");
 }
 
+- (void)peripheralManager:(CBPeripheralManager *)peripheral didReceiveWriteRequests:(NSArray *)requests {
+    CBATTRequest *req = [requests objectAtIndex:0];
+    NSData *val = req.value;
+    NSLog(@"Got write value %@", val);
+}
+
 - (void)peripheralManager:(CBPeripheralManager *)peripheral central:(CBCentral *)central didSubscribeToCharacteristic:(CBCharacteristic *)characteristic {
     NSLog(@"peripheralManager didSubscribeToCharacteristic %@", central.identifier.UUIDString);
 }
@@ -414,6 +420,10 @@
             if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:@"8363BECA-88C4-4EFB-9CAB-6815562BCECD"]]) {
                 NSLog(@"Reading dynamic characteristic!");
                 [peripheral readValueForCharacteristic:characteristic];
+                // TODO: Perhaps write the central's userid
+                [peripheral writeValue:[self.username dataUsingEncoding:NSUTF8StringEncoding]
+                                        forCharacteristic:characteristic type:CBCharacteristicWriteWithoutResponse];
+                
             }
         }
     }
