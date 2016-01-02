@@ -196,7 +196,7 @@
     
     CBMutableCharacteristic *dynamicReadCharacteristic =
     [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:@"8363BECA-88C4-4EFB-9CAB-6815562BCECD"]
-                                       properties:CBCharacteristicPropertyRead
+                                       properties:CBCharacteristicPropertyWriteWithoutResponse
                                             value:nil
                                       permissions:CBAttributePermissionsReadable];
     
