@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0429793E1C3B0EAB0016DC40 /* Avenir Next.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 0429793B1C3B0EAB0016DC40 /* Avenir Next.ttc */; };
+		0429793F1C3B0EAB0016DC40 /* Brown - Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0429793C1C3B0EAB0016DC40 /* Brown - Bold.otf */; };
+		042979401C3B0EAB0016DC40 /* Brown - Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0429793D1C3B0EAB0016DC40 /* Brown - Regular.otf */; };
 		17B568861A87864B007E0C5F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 17B568851A87864B007E0C5F /* main.m */; };
 		17B568891A87864B007E0C5F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 17B568881A87864B007E0C5F /* AppDelegate.m */; };
 		17B568911A87864B007E0C5F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17B568901A87864B007E0C5F /* Images.xcassets */; };
@@ -35,6 +38,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0429793B1C3B0EAB0016DC40 /* Avenir Next.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Avenir Next.ttc"; sourceTree = "<group>"; };
+		0429793C1C3B0EAB0016DC40 /* Brown - Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Brown - Bold.otf"; sourceTree = "<group>"; };
+		0429793D1C3B0EAB0016DC40 /* Brown - Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Brown - Regular.otf"; sourceTree = "<group>"; };
 		17B568801A87864B007E0C5F /* DiscoveryExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiscoveryExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17B568841A87864B007E0C5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		17B568851A87864B007E0C5F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -87,9 +93,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		042979391C3B0E6B0016DC40 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0429793A1C3B0EA20016DC40 /* Fonts */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		0429793A1C3B0EA20016DC40 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				0429793B1C3B0EAB0016DC40 /* Avenir Next.ttc */,
+				0429793C1C3B0EAB0016DC40 /* Brown - Bold.otf */,
+				0429793D1C3B0EAB0016DC40 /* Brown - Regular.otf */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
 		17B568771A87864B007E0C5F = {
 			isa = PBXGroup;
 			children = (
+				042979391C3B0E6B0016DC40 /* Resources */,
 				9DC3B4FC1A9E0FCF00B1603B /* Discovery */,
 				17B568821A87864B007E0C5F /* DiscoveryExample */,
 				17B5689C1A87864B007E0C5F /* DiscoveryExampleTests */,
@@ -294,7 +319,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0429793E1C3B0EAB0016DC40 /* Avenir Next.ttc in Resources */,
+				0429793F1C3B0EAB0016DC40 /* Brown - Bold.otf in Resources */,
 				17B568941A87864B007E0C5F /* LaunchScreen.xib in Resources */,
+				042979401C3B0EAB0016DC40 /* Brown - Regular.otf in Resources */,
 				17B568911A87864B007E0C5F /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

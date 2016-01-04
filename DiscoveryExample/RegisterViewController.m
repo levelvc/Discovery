@@ -57,7 +57,7 @@
     
     self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
     
-    [self addGradientBgLayer:@[[UIColor colorWithHexString:@"50BBE6"], [UIColor colorWithHexString:@"EDD7F1"]]];
+    [self addGradientBgLayer:@[[UIColor colorWithHexString:@"FE5559"], [UIColor colorWithHexString:@"A755A7"]]];
     
     
     // start creating views

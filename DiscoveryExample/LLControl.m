@@ -26,9 +26,9 @@
 {
     UITextField *textfield = [[PlainTextField alloc] initWithFrame:CGRectZero];
     textfield.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.3];
-    textfield.font = [UIFont systemFontOfSize:33];
+    textfield.font = [UIFont fontWithName:@"AvenirNext-Regular" size:17.0f];
     textfield.adjustsFontSizeToFitWidth = YES;
-    textfield.textColor = [UIColor darkGrayColor];
+    textfield.textColor = [UIColor whiteColor];
     textfield.placeholder = placeholder;
     return textfield;
 }

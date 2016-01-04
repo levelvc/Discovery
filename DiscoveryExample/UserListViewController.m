@@ -36,7 +36,7 @@
 {
     [super viewDidLoad];
 	
-    [self addGradientBgLayer:@[[UIColor colorWithHexString:@"50BBE6"], [UIColor colorWithHexString:@"EDD7F1"]]];
+    [self addGradientBgLayer:@[[UIColor colorWithHexString:@"C93BDF"], [UIColor colorWithHexString:@"2A62E1"]]];
     
     self.navigationItem.title = @"Nearby People";
     
@@ -70,8 +70,7 @@
     __weak typeof(self) weakSelf = self;
     
     // start Discovery
-    self.discovery = [[Discovery alloc] initWithUUID:uuid username:self.username usersBlock:^(NSArray *users, BOOL usersChanged) {
-        
+    self.discovery = [[Discovery alloc] initWithUUID:uuid username:self.username usersBlock:^(NSArray *users, BOOL usersChanged) {        
         NSLog(@"Updating table view with users count : %lu", (unsigned long)users.count);
         weakSelf.users = users;
         [weakSelf.tableView reloadData];
