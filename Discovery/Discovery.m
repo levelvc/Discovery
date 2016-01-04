@@ -232,7 +232,8 @@
 }
 
 - (void)peripheralManager:(CBPeripheralManager *)peripheral didReceiveWriteRequests:(NSArray *)requests {
-    NSLog(@"peripheralManager:%@ didReceiveWriteRequests:%@", peripheral, requests);
+    //NSLog(@"peripheralManager:%@ didReceiveWriteRequests:%@", peripheral, requests);
+    NSLog(@"peripheralManager didReceiveWriteRequests");
     CBATTRequest *req = [requests objectAtIndex:0];
     NSString *s = [[NSString alloc] initWithData:req.value encoding:NSUTF8StringEncoding];
     NSLog(@"Got write value %@", s);
