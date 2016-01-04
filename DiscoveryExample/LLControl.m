@@ -8,7 +8,7 @@
 
 #import "LLControl.h"
 #import "PlainTextField.h"
-#import <EDColor.h>
+#import "EDColor.h"
 
 @implementation LLControl
 + (UIButton *)whiteButton:(NSString *)title

@@ -9,14 +9,18 @@
 #import "RegisterViewController.h"
 #import "LLUtility.h"
 #import "UserListViewController.h"
-#import <Masonry.h>
+#import "Masonry.h"
+#import "AttachedDiscovery-Swift.h"
 
 @interface RegisterViewController ()
 @property (strong, nonatomic) UIScrollView *scrollView;
 @property (strong, nonatomic) UITextField *usernameField;
+@property (strong, nonatomic) UITextField *passwordField;
 @end
 
 @implementation RegisterViewController
+
+APIRequestManager * requestManager;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -31,6 +35,8 @@
 {
     [super viewDidLoad];
 
+    requestManager = [[APIRequestManager alloc] initWithApi_key:@"ios_client" host_url:@"http://freestyle-lb-1747063986.us-east-1.elb.amazonaws.com:80"];
+    
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
@@ -75,7 +81,7 @@
     self.usernameField = [LLControl textfild:@"Username"];
     self.usernameField.frame = CGRectMake(0, 0, 100, 100);
     self.usernameField.delegate = self;
-    self.usernameField.returnKeyType = UIReturnKeyGo;
+    self.usernameField.returnKeyType = UIReturnKeyNext;
     self.usernameField.autocorrectionType = UITextAutocorrectionTypeNo;
     self.usernameField.tag = 12;
     self.usernameField.autocapitalizationType = UITextAutocapitalizationTypeNone;
@@ -88,6 +94,26 @@
         make.height.equalTo(@70);
         make.top.equalTo(@10);
     }];
+    
+    //password field
+    self.passwordField = [LLControl textfild:@"Password"];
+    self.passwordField.frame = CGRectMake(0, 0, 100, 100);
+    self.passwordField.delegate = self;
+    self.passwordField.autocorrectionType = UITextAutocorrectionTypeNo;
+    self.passwordField.returnKeyType = UIReturnKeyGo;
+    //self.usernameField.tag = 13;
+    self.passwordField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    self.passwordField.keyboardAppearance = UIKeyboardAppearanceDark;
+    [self.scrollView addSubview:self.passwordField];
+    
+    [self.passwordField mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.and.right.equalTo(self.scrollView);
+        make.width.equalTo(self.scrollView);
+        make.height.equalTo(@70);
+        make.top.equalTo(self.usernameField.mas_bottom).with.offset(10);
+    }];
+    
+    
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
@@ -112,14 +138,28 @@
 - (void)registerButtonPressed
 {
     NSString *username = self.usernameField.text;
+    NSString *password = self.passwordField.text;
     
     if(username.length == 0) {
-        [LLUtility showAlertWithTitle:@"Form" andMessage:@"Pick a username."];
+        [LLUtility showAlertWithTitle:@"Erro" andMessage:@"Username cannot be blank."];
         return;
     }
     
-    UserListViewController *vc = [[UserListViewController alloc] initWithUsername:username];
-    [self.navigationController pushViewController:vc animated:YES];
+    if(password.length == 0) {
+        [LLUtility showAlertWithTitle:@"Erro" andMessage:@"Password cannot be blank."];
+        return;
+    }
+    
+    NSString *userId = [requestManager login:username password:password];
+    NSLog(@"userId %@", userId);
+    if(userId != nil) {
+        UserListViewController *vc = [[UserListViewController alloc] initWithUsername:username userId:userId];
+        [self.navigationController pushViewController:vc animated:YES];
+    } else {
+        [LLUtility showAlertWithTitle:@"Error" andMessage:@"Login failed. Try again."];
+        return;
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning

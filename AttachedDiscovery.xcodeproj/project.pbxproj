@@ -10,6 +10,8 @@
 		0429793E1C3B0EAB0016DC40 /* Avenir Next.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 0429793B1C3B0EAB0016DC40 /* Avenir Next.ttc */; };
 		0429793F1C3B0EAB0016DC40 /* Brown - Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0429793C1C3B0EAB0016DC40 /* Brown - Bold.otf */; };
 		042979401C3B0EAB0016DC40 /* Brown - Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0429793D1C3B0EAB0016DC40 /* Brown - Regular.otf */; };
+		042979461C3B1FA50016DC40 /* APIRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042979451C3B1FA50016DC40 /* APIRequestManager.swift */; };
+		042979481C3B21780016DC40 /* HMACAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042979471C3B21780016DC40 /* HMACAuthentication.swift */; };
 		17B568861A87864B007E0C5F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 17B568851A87864B007E0C5F /* main.m */; };
 		17B568891A87864B007E0C5F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 17B568881A87864B007E0C5F /* AppDelegate.m */; };
 		17B568911A87864B007E0C5F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17B568901A87864B007E0C5F /* Images.xcassets */; };
@@ -21,10 +23,10 @@
 		17C70CBE1A878FF500723200 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17C70CBD1A878FF500723200 /* RegisterViewController.m */; };
 		17C70CCF1A87918300723200 /* UserListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17C70CCE1A87918300723200 /* UserListViewController.m */; };
 		17C70CE31A8811A000723200 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17C70CE21A8811A000723200 /* BaseViewController.m */; };
+		564728A66785A6D9CFFCDF4D /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 942ECC574F97009045867322 /* Pods.framework */; };
 		9DC3B5041A9E0FD000B1603B /* BLEUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DC3B4FE1A9E0FD000B1603B /* BLEUser.m */; };
 		9DC3B5051A9E0FD000B1603B /* Discovery.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DC3B5001A9E0FD000B1603B /* Discovery.m */; };
 		9DC3B5061A9E0FD000B1603B /* EasedValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DC3B5021A9E0FD000B1603B /* EasedValue.m */; };
-		ECABFD235845745D5B16143E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AE0F8371DA718EBA2DA78ED /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,14 +43,17 @@
 		0429793B1C3B0EAB0016DC40 /* Avenir Next.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Avenir Next.ttc"; sourceTree = "<group>"; };
 		0429793C1C3B0EAB0016DC40 /* Brown - Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Brown - Bold.otf"; sourceTree = "<group>"; };
 		0429793D1C3B0EAB0016DC40 /* Brown - Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Brown - Regular.otf"; sourceTree = "<group>"; };
-		17B568801A87864B007E0C5F /* DiscoveryExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiscoveryExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		042979441C3B1FA40016DC40 /* DiscoveryExample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DiscoveryExample-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
+		042979451C3B1FA50016DC40 /* APIRequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIRequestManager.swift; sourceTree = "<group>"; };
+		042979471C3B21780016DC40 /* HMACAuthentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HMACAuthentication.swift; sourceTree = "<group>"; };
+		17B568801A87864B007E0C5F /* AttachedDiscovery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AttachedDiscovery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17B568841A87864B007E0C5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		17B568851A87864B007E0C5F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		17B568871A87864B007E0C5F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		17B568881A87864B007E0C5F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		17B568901A87864B007E0C5F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		17B568931A87864B007E0C5F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		17B568991A87864B007E0C5F /* DiscoveryExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiscoveryExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		17B568991A87864B007E0C5F /* AttachedDiscovery.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AttachedDiscovery.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		17B5689E1A87864B007E0C5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		17B5689F1A87864B007E0C5F /* DiscoveryExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoveryExampleTests.m; sourceTree = "<group>"; };
 		17C70CB31A878EBD00723200 /* LLUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLUtility.h; sourceTree = "<group>"; };
@@ -63,9 +68,9 @@
 		17C70CCE1A87918300723200 /* UserListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserListViewController.m; sourceTree = "<group>"; };
 		17C70CE11A8811A000723200 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		17C70CE21A8811A000723200 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
-		1AE0F8371DA718EBA2DA78ED /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		332BDA49417653D9762F8158 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		71F43AE6D94AF22307DB0267 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		942ECC574F97009045867322 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DC3B4FD1A9E0FD000B1603B /* BLEUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLEUser.h; sourceTree = "<group>"; };
 		9DC3B4FE1A9E0FD000B1603B /* BLEUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLEUser.m; sourceTree = "<group>"; };
 		9DC3B4FF1A9E0FD000B1603B /* Discovery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Discovery.h; sourceTree = "<group>"; };
@@ -79,7 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ECABFD235845745D5B16143E /* libPods.a in Frameworks */,
+				564728A66785A6D9CFFCDF4D /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -111,12 +116,31 @@
 			name = Fonts;
 			sourceTree = "<group>";
 		};
+		042979431C3B1F980016DC40 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				042979451C3B1FA50016DC40 /* APIRequestManager.swift */,
+			);
+			name = API;
+			sourceTree = "<group>";
+		};
+		042979491C3B217C0016DC40 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				042979471C3B21780016DC40 /* HMACAuthentication.swift */,
+			);
+			name = Authentication;
+			sourceTree = "<group>";
+		};
 		17B568771A87864B007E0C5F = {
 			isa = PBXGroup;
 			children = (
-				042979391C3B0E6B0016DC40 /* Resources */,
+				042979491C3B217C0016DC40 /* Authentication */,
+				042979441C3B1FA40016DC40 /* DiscoveryExample-Bridging-Header.h */,
+				042979431C3B1F980016DC40 /* API */,
 				9DC3B4FC1A9E0FCF00B1603B /* Discovery */,
 				17B568821A87864B007E0C5F /* DiscoveryExample */,
+				042979391C3B0E6B0016DC40 /* Resources */,
 				17B5689C1A87864B007E0C5F /* DiscoveryExampleTests */,
 				17B568811A87864B007E0C5F /* Products */,
 				59B306508CEC987C1D84DF3C /* Pods */,
@@ -127,8 +151,8 @@
 		17B568811A87864B007E0C5F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				17B568801A87864B007E0C5F /* DiscoveryExample.app */,
-				17B568991A87864B007E0C5F /* DiscoveryExampleTests.xctest */,
+				17B568801A87864B007E0C5F /* AttachedDiscovery.app */,
+				17B568991A87864B007E0C5F /* AttachedDiscovery.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -224,7 +248,7 @@
 		CF4E520E5FC71B587660FCA7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1AE0F8371DA718EBA2DA78ED /* libPods.a */,
+				942ECC574F97009045867322 /* Pods.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -232,9 +256,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		17B5687F1A87864B007E0C5F /* DiscoveryExample */ = {
+		17B5687F1A87864B007E0C5F /* AttachedDiscovery */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 17B568A31A87864B007E0C5F /* Build configuration list for PBXNativeTarget "DiscoveryExample" */;
+			buildConfigurationList = 17B568A31A87864B007E0C5F /* Build configuration list for PBXNativeTarget "AttachedDiscovery" */;
 			buildPhases = (
 				43F65AF0166F2264758A8D88 /* Check Pods Manifest.lock */,
 				17B5687C1A87864B007E0C5F /* Sources */,
@@ -247,14 +271,14 @@
 			);
 			dependencies = (
 			);
-			name = DiscoveryExample;
+			name = AttachedDiscovery;
 			productName = DiscoveryExample;
-			productReference = 17B568801A87864B007E0C5F /* DiscoveryExample.app */;
+			productReference = 17B568801A87864B007E0C5F /* AttachedDiscovery.app */;
 			productType = "com.apple.product-type.application";
 		};
-		17B568981A87864B007E0C5F /* DiscoveryExampleTests */ = {
+		17B568981A87864B007E0C5F /* AttachedDiscoveryTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 17B568A61A87864B007E0C5F /* Build configuration list for PBXNativeTarget "DiscoveryExampleTests" */;
+			buildConfigurationList = 17B568A61A87864B007E0C5F /* Build configuration list for PBXNativeTarget "AttachedDiscoveryTests" */;
 			buildPhases = (
 				17B568951A87864B007E0C5F /* Sources */,
 				17B568961A87864B007E0C5F /* Frameworks */,
@@ -265,9 +289,9 @@
 			dependencies = (
 				17B5689B1A87864B007E0C5F /* PBXTargetDependency */,
 			);
-			name = DiscoveryExampleTests;
+			name = AttachedDiscoveryTests;
 			productName = DiscoveryExampleTests;
-			productReference = 17B568991A87864B007E0C5F /* DiscoveryExampleTests.xctest */;
+			productReference = 17B568991A87864B007E0C5F /* AttachedDiscovery.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -276,6 +300,7 @@
 		17B568781A87864B007E0C5F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Ömer Faruk Gül";
 				TargetAttributes = {
@@ -295,7 +320,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 17B5687B1A87864B007E0C5F /* Build configuration list for PBXProject "DiscoveryExample" */;
+			buildConfigurationList = 17B5687B1A87864B007E0C5F /* Build configuration list for PBXProject "AttachedDiscovery" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -308,8 +333,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				17B5687F1A87864B007E0C5F /* DiscoveryExample */,
-				17B568981A87864B007E0C5F /* DiscoveryExampleTests */,
+				17B5687F1A87864B007E0C5F /* AttachedDiscovery */,
+				17B568981A87864B007E0C5F /* AttachedDiscoveryTests */,
 			);
 		};
 /* End PBXProject section */
@@ -389,6 +414,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				042979461C3B1FA50016DC40 /* APIRequestManager.swift in Sources */,
 				17C70CBA1A878EBD00723200 /* PlainTextField.m in Sources */,
 				17C70CCF1A87918300723200 /* UserListViewController.m in Sources */,
 				17B568891A87864B007E0C5F /* AppDelegate.m in Sources */,
@@ -397,6 +423,7 @@
 				17C70CB91A878EBD00723200 /* LLUtility.m in Sources */,
 				17C70CBB1A878EBD00723200 /* LLControl.m in Sources */,
 				17C70CE31A8811A000723200 /* BaseViewController.m in Sources */,
+				042979481C3B21780016DC40 /* HMACAuthentication.swift in Sources */,
 				9DC3B5041A9E0FD000B1603B /* BLEUser.m in Sources */,
 				17C70CBE1A878FF500723200 /* RegisterViewController.m in Sources */,
 				9DC3B5061A9E0FD000B1603B /* EasedValue.m in Sources */,
@@ -416,7 +443,7 @@
 /* Begin PBXTargetDependency section */
 		17B5689B1A87864B007E0C5F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 17B5687F1A87864B007E0C5F /* DiscoveryExample */;
+			target = 17B5687F1A87864B007E0C5F /* AttachedDiscovery */;
 			targetProxy = 17B5689A1A87864B007E0C5F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -516,13 +543,16 @@
 			baseConfigurationReference = 71F43AE6D94AF22307DB0267 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = DiscoveryExample/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = AttachedDiscovery;
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "DiscoveryExample-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -531,13 +561,15 @@
 			baseConfigurationReference = 332BDA49417653D9762F8158 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = DiscoveryExample/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = AttachedDiscovery;
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "DiscoveryExample-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -555,8 +587,8 @@
 				);
 				INFOPLIST_FILE = DiscoveryExampleTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DiscoveryExample.app/DiscoveryExample";
+				PRODUCT_NAME = AttachedDiscovery;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AttachedDiscovery.app/AttachedDiscovery";
 			};
 			name = Debug;
 		};
@@ -570,15 +602,15 @@
 				);
 				INFOPLIST_FILE = DiscoveryExampleTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DiscoveryExample.app/DiscoveryExample";
+				PRODUCT_NAME = AttachedDiscovery;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AttachedDiscovery.app/AttachedDiscovery";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		17B5687B1A87864B007E0C5F /* Build configuration list for PBXProject "DiscoveryExample" */ = {
+		17B5687B1A87864B007E0C5F /* Build configuration list for PBXProject "AttachedDiscovery" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				17B568A11A87864B007E0C5F /* Debug */,
@@ -587,7 +619,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		17B568A31A87864B007E0C5F /* Build configuration list for PBXNativeTarget "DiscoveryExample" */ = {
+		17B568A31A87864B007E0C5F /* Build configuration list for PBXNativeTarget "AttachedDiscovery" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				17B568A41A87864B007E0C5F /* Debug */,
@@ -596,7 +628,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		17B568A61A87864B007E0C5F /* Build configuration list for PBXNativeTarget "DiscoveryExampleTests" */ = {
+		17B568A61A87864B007E0C5F /* Build configuration list for PBXNativeTarget "AttachedDiscoveryTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				17B568A71A87864B007E0C5F /* Debug */,

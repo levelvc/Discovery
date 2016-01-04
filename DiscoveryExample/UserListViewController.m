@@ -9,13 +9,15 @@
 #import "UserListViewController.h"
 #import "BLEUser.h"
 #import "LLUtility.h"
-#import <Masonry.h>
+#import "Masonry.h"
 #import "Discovery.h"
+#import "AttachedDiscovery-Swift.h"
 
 #define UPDATE_INTERVAL 2.0f
 
 @interface UserListViewController ()
 @property (strong, nonatomic) NSString *username;
+@property (strong, nonatomic) NSString *userId;
 @property (strong, nonatomic) NSArray *users;
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) Discovery *discovery;
@@ -23,11 +25,15 @@
 
 @implementation UserListViewController
 
-- (id)initWithUsername:(NSString *)username
+APIRequestManager * requestManager;
+User * user;
+
+- (id)initWithUsername:(NSString *)username userId:(NSString*)userId
 {
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
         _username = username;
+        _userId = userId;
     }
     return self;
 }
@@ -35,10 +41,23 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+        
+    requestManager = [[APIRequestManager alloc] initWithApi_key:@"ios_client" host_url:@"http://freestyle-lb-1747063986.us-east-1.elb.amazonaws.com:80"];
+    
+    dispatch_queue_t userQueue;
+    userQueue = dispatch_queue_create("userQueue", nil);
+    
+    dispatch_async(userQueue, ^{
+        user = [requestManager getUser];
+        if(user != nil) {
+            NSString *firstname = user.firstname;
+            self.navigationItem.title = [firstname stringByAppendingString:@"'s Nearby People"];
+        } else {
+            self.navigationItem.title = @"Nearby People";
+        }
+    });
 	
     [self addGradientBgLayer:@[[UIColor colorWithHexString:@"C93BDF"], [UIColor colorWithHexString:@"2A62E1"]]];
-    
-    self.navigationItem.title = @"Nearby People";
     
     self.users = [NSArray array];
     

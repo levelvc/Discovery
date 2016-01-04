@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
+#import "AttachedDiscovery-Swift.h"
 
 @interface UserListViewController : BaseViewController <UITableViewDataSource, UITableViewDelegate>
-- (id)initWithUsername:(NSString *)username;
+- (id)initWithUsername:(NSString *)username userId:(NSString*)userId;
 @end
