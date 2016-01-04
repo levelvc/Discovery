@@ -234,8 +234,8 @@
 - (void)peripheralManager:(CBPeripheralManager *)peripheral didReceiveWriteRequests:(NSArray *)requests {
     NSLog(@"peripheralManager:%@ didReceiveWriteRequests:%@", peripheral, requests);
     CBATTRequest *req = [requests objectAtIndex:0];
-    NSData *val = req.value;
-    NSLog(@"Got write value %@", val);
+    NSString *s = [[NSString alloc] initWithData:req.value encoding:NSUTF8StringEncoding];
+    NSLog(@"Got write value %@", s);
 }
 
 - (void)peripheralManager:(CBPeripheralManager *)peripheral central:(CBCentral *)central didSubscribeToCharacteristic:(CBCharacteristic *)characteristic {
