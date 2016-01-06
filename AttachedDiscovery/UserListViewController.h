@@ -11,6 +11,7 @@
 #import "AttachedDiscovery-Swift.h"
 #import <CoreLocation/CoreLocation.h>
 #import "Discovery.h"
+#import "SVProgressHUD.h"
 
 @interface UserListViewController : BaseViewController <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, MediaGrabberDelegate>
 - (id)initWithUsername:(NSString *)username userId:(NSString*)userId;

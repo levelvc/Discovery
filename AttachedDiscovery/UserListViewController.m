@@ -101,10 +101,20 @@ MediaGrabber *mediaGrabber;
     __weak typeof(self) weakSelf = self;
     
     // start Discovery
+    [SVProgressHUD setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:0.10]];
+    [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
+    [SVProgressHUD show];
     self.discovery = [[Discovery alloc] initWithUUID:uuid username:self.username usersBlock:^(NSArray *users, BOOL usersChanged) {        
         NSLog(@"Updating table view with users count : %lu", (unsigned long)users.count);
         weakSelf.users = users;
         [weakSelf.tableView reloadData];
+        if(weakSelf.users.count > 0) {
+            [SVProgressHUD dismiss];
+        } else {
+            if(![SVProgressHUD isVisible]) {
+                [SVProgressHUD show];
+            }
+        }
     }];
     
     self.locationQueue = [[NSMutableArray alloc] init];
@@ -149,13 +159,29 @@ MediaGrabber *mediaGrabber;
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     }
     
+    // TODO: Change this to compare old date with new date
     BLEUser *bleUser = [self.users objectAtIndex:indexPath.row];
     cell.textLabel.text = bleUser.username;
-    int mediaCount = 0;
+    
+    NSDate *storedUpdate = [mediaGrabber getPeerMediaUpdate:bleUser.username];
+    NSDate *currentUpdate = nil;
     if(bleUser.dynamicArray != nil) {
-        mediaCount = (int)bleUser.dynamicArray[1];
+        currentUpdate = bleUser.dynamicArray[0];
     }
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"Proximity: %ld   New Photos: %d", (long)bleUser.proximity, mediaCount];
+    
+    BOOL newPhotos = NO;
+    if(storedUpdate != nil && currentUpdate != nil) {
+        // Compare
+        switch ([storedUpdate compare:currentUpdate]) {
+            case NSOrderedSame:
+                newPhotos = YES;
+            default:
+                newPhotos = NO;
+        }
+    }
+    [mediaGrabber updatePeerMediaUpdate:bleUser.username updateDate:currentUpdate];    
+    
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"Proximity: %ld   New Photos: %@", (long)bleUser.proximity, newPhotos ? @"Yes" : @"No"];
     
     NSInteger proximity = bleUser.proximity;
     
@@ -236,6 +262,7 @@ MediaGrabber *mediaGrabber;
 -(void) didReceiveMediaUpdate:(NSArray*)photoAssets latestDate:(NSDate*)latestDate totalPhotoAssets:(NSInteger)totalPhotoAssets {
     NSLog(@"Received new media update: %d", (int)totalPhotoAssets);
     NSArray *mediaArray = @[latestDate.formattedISO8601, @(totalPhotoAssets)];
+    // This is where you broadcast your new photos
     [self.discovery updatePeripheralDynamicReadCharacteristic:mediaArray];
 }
 

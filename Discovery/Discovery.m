@@ -486,6 +486,8 @@
             BLEUser *bleUser = [self userWithPeripheralId:peripheral.identifier.UUIDString];
             if(bleUser != nil) {
                 bleUser.dynamicArray = array;
+                [self.usersMap setObject:bleUser forKey:bleUser.peripheralId];
+                [self updateList];
             }
         }
     }

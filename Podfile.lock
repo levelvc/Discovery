@@ -28,6 +28,7 @@ PODS:
   - Realm/Headers (0.97.0)
   - RealmSwift (0.97.0):
     - Realm (= 0.97.0)
+  - SVProgressHUD (1.1.3)
   - SwiftyJSON (2.3.2)
   - ViewUtils (1.1.2)
 
@@ -37,6 +38,7 @@ DEPENDENCIES:
   - EDColor (~> 0.4)
   - Masonry (~> 0.6)
   - RealmSwift
+  - SVProgressHUD
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
   - ViewUtils (~> 1.1)
 
@@ -56,6 +58,7 @@ SPEC CHECKSUMS:
   Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
   Realm: b498a6fb9d288b171ff98d0e2d4384c295be8990
   RealmSwift: d014810dec75c9a3f1a33926d2dabfed855c582c
+  SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
   ViewUtils: 68e42c708a4b3912e39691cef5080282dc5013fb
 

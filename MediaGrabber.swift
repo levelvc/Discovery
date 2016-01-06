@@ -14,6 +14,10 @@ class LastPullDate : Object {
     dynamic var lastDate : NSDate? = nil
 }
 
+class PeerMediaUpdates : Object {
+    dynamic var peerUpdateMap : NSMutableDictionary? = nil
+}
+
 @objc protocol MediaGrabberDelegate {
     func didReceiveMediaUpdate(photoAssets:NSArray, latestDate:NSDate, totalPhotoAssets:Int)
 }
@@ -39,9 +43,38 @@ class LastPullDate : Object {
         }
         
         // TESTING!!!!!!!!!!
-        self.lastPullDate = NSDate(timeIntervalSinceNow:-(24 * 3600) as NSTimeInterval)
+        //self.lastPullDate = NSDate(timeIntervalSinceNow:-(24 * 3600) as NSTimeInterval)
         
         print("Last media pull date:", self.lastPullDate)
+    }
+    
+    func updatePeerMediaUpdate(username:String, updateDate:NSDate) {
+        let realm = try! Realm()
+        if let lastPeerMediaUpdates = realm.objects(PeerMediaUpdates).first {
+            let map = lastPeerMediaUpdates.peerUpdateMap
+            if(map != nil) {
+                map?.setValue(updateDate, forKey: username)
+                try! realm.write {
+                    lastPeerMediaUpdates.peerUpdateMap = map
+                }
+            }
+        } else {
+            let peerMediaUpdate = PeerMediaUpdates()
+            peerMediaUpdate.peerUpdateMap = [username:updateDate]
+            try! realm.write {
+                realm.add(peerMediaUpdate)
+            }
+        }
+    }
+    
+    func getPeerMediaUpdate(username:String) -> NSDate?{
+        let realm = try! Realm()
+        if let lastPeerMediaUpdates = realm.objects(PeerMediaUpdates).first {
+            if let map = lastPeerMediaUpdates.peerUpdateMap {
+                return map[username] as? NSDate
+            }
+        }
+        return nil
     }
     
     func startCheckingForMedia() {
