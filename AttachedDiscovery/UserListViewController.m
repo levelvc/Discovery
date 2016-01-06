@@ -103,16 +103,17 @@ MediaGrabber *mediaGrabber;
     // start Discovery
     [SVProgressHUD setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:0.10]];
     [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
-    [SVProgressHUD show];
+    [SVProgressHUD setFont:[UIFont fontWithName:@"AvenirNext-Regular" size:12.0f]];
+    [SVProgressHUD showWithStatus:@"Scanning for Peers"];
     self.discovery = [[Discovery alloc] initWithUUID:uuid username:self.username usersBlock:^(NSArray *users, BOOL usersChanged) {        
-        NSLog(@"Updating table view with users count : %lu", (unsigned long)users.count);
+        NSLog(@"Updating table view with users count : %lu %@", (unsigned long)users.count, users);
         weakSelf.users = users;
         [weakSelf.tableView reloadData];
         if(weakSelf.users.count > 0) {
             [SVProgressHUD dismiss];
         } else {
             if(![SVProgressHUD isVisible]) {
-                [SVProgressHUD show];
+                [SVProgressHUD showWithStatus:@"Scanning for Peers"];
             }
         }
     }];
@@ -220,7 +221,10 @@ MediaGrabber *mediaGrabber;
     NSLog(@"Row selected! %@", indexPath);
     
     BLEUser *bleUser = [self.users objectAtIndex:indexPath.row];
-    [LLUtility showAlertWithTitle:@"Your Friend is not Connected" andMessage:[NSString stringWithFormat:@"Would you like to send a connection notification to %@?", bleUser.username]];
+    //[LLUtility showAlertWithTitle:@"Your Friend is not Connected" andMessage:[NSString stringWithFormat:@"Would you like to send a connection notification to %@?", bleUser.username]];
+    
+    PeerConnectionViewController *vc = [[PeerConnectionViewController alloc] initWithPeerUsername:bleUser.username];
+    [self.navigationController pushViewController:vc animated:YES];
 
 }
 

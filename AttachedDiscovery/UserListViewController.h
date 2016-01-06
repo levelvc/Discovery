@@ -12,6 +12,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "Discovery.h"
 #import "SVProgressHUD.h"
+#import "PeerConnectionViewController.h"
 
 @interface UserListViewController : BaseViewController <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, MediaGrabberDelegate>
 - (id)initWithUsername:(NSString *)username userId:(NSString*)userId;

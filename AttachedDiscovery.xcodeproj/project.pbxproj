@@ -14,6 +14,8 @@
 		042979481C3B21780016DC40 /* HMACAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042979471C3B21780016DC40 /* HMACAuthentication.swift */; };
 		046011EA1C3C5C03002E3A50 /* MediaGrabber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046011E91C3C5C03002E3A50 /* MediaGrabber.swift */; };
 		046011ED1C3C7B1C002E3A50 /* DateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046011EC1C3C7B1C002E3A50 /* DateUtils.swift */; };
+		046011F91C3DCB59002E3A50 /* PeerServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046011F81C3DCB59002E3A50 /* PeerServiceManager.swift */; };
+		0491F8BF1C3DCC02006AF65E /* PeerConnectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0491F8BE1C3DCC02006AF65E /* PeerConnectionViewController.m */; };
 		17B568861A87864B007E0C5F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 17B568851A87864B007E0C5F /* main.m */; };
 		17B568891A87864B007E0C5F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 17B568881A87864B007E0C5F /* AppDelegate.m */; };
 		17B568911A87864B007E0C5F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17B568901A87864B007E0C5F /* Images.xcassets */; };
@@ -50,6 +52,9 @@
 		042979471C3B21780016DC40 /* HMACAuthentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HMACAuthentication.swift; sourceTree = "<group>"; };
 		046011E91C3C5C03002E3A50 /* MediaGrabber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaGrabber.swift; sourceTree = "<group>"; };
 		046011EC1C3C7B1C002E3A50 /* DateUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateUtils.swift; sourceTree = "<group>"; };
+		046011F81C3DCB59002E3A50 /* PeerServiceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeerServiceManager.swift; sourceTree = "<group>"; };
+		0491F8BE1C3DCC02006AF65E /* PeerConnectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeerConnectionViewController.m; sourceTree = "<group>"; };
+		0491F8C01C3DCC17006AF65E /* PeerConnectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PeerConnectionViewController.h; sourceTree = "<group>"; };
 		17B568801A87864B007E0C5F /* AttachedDiscovery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AttachedDiscovery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17B568841A87864B007E0C5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		17B568851A87864B007E0C5F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -144,6 +149,14 @@
 			name = Media;
 			sourceTree = "<group>";
 		};
+		046011F71C3DCB4D002E3A50 /* Multipeer */ = {
+			isa = PBXGroup;
+			children = (
+				046011F81C3DCB59002E3A50 /* PeerServiceManager.swift */,
+			);
+			name = Multipeer;
+			sourceTree = "<group>";
+		};
 		17B568771A87864B007E0C5F = {
 			isa = PBXGroup;
 			children = (
@@ -173,6 +186,7 @@
 		17B568821A87864B007E0C5F /* AttachedDiscovery */ = {
 			isa = PBXGroup;
 			children = (
+				046011F71C3DCB4D002E3A50 /* Multipeer */,
 				17C70CB21A878EA200723200 /* Utils */,
 				17B568AD1A87885A007E0C5F /* Controllers */,
 				17B568871A87864B007E0C5F /* AppDelegate.h */,
@@ -213,6 +227,8 @@
 		17B568AD1A87885A007E0C5F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				0491F8C01C3DCC17006AF65E /* PeerConnectionViewController.h */,
+				0491F8BE1C3DCC02006AF65E /* PeerConnectionViewController.m */,
 				17C70CCD1A87918300723200 /* UserListViewController.h */,
 				17C70CCE1A87918300723200 /* UserListViewController.m */,
 				17C70CBC1A878FF500723200 /* RegisterViewController.h */,
@@ -442,7 +458,9 @@
 				042979481C3B21780016DC40 /* HMACAuthentication.swift in Sources */,
 				9DC3B5041A9E0FD000B1603B /* BLEUser.m in Sources */,
 				17C70CBE1A878FF500723200 /* RegisterViewController.m in Sources */,
+				0491F8BF1C3DCC02006AF65E /* PeerConnectionViewController.m in Sources */,
 				9DC3B5061A9E0FD000B1603B /* EasedValue.m in Sources */,
+				046011F91C3DCB59002E3A50 /* PeerServiceManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -310,7 +310,6 @@
     // so the client will receive ordered users according to the proximity.
     [users sortUsingDescriptors: [NSArray arrayWithObjects: [NSSortDescriptor sortDescriptorWithKey:@"proximity"
                                                                                           ascending:NO], nil]];
-    
     if(self.usersBlock) {
         self.usersBlock([users mutableCopy], usersChanged);
     }

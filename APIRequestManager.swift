@@ -50,13 +50,13 @@ class User : Object {
     }
     
     
-    func login(username:String, password:String) -> NSString {
+    func login(username:String, password:String) -> NSString? {
         let semaphore = dispatch_semaphore_create(0)
         self.requestManager.completionQueue = dispatch_queue_create("login", nil)
         self.requestManager.requestSerializer.clearAuthorizationHeader()
         self.requestManager.requestSerializer.setAuthorizationHeaderFieldWithUsername(username, password:password)
         
-        var userId : NSString!
+        var userId : NSString?
         
         self.requestManager.GET(self.host_url + "/login",
             parameters: nil,
@@ -87,7 +87,7 @@ class User : Object {
                 userId = nil
         })
         dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
-        return userId!;
+        return userId;
     }
     
     func getLocationUpdate(locations:[CLLocation]) -> [NSMutableDictionary] {

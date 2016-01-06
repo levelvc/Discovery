@@ -60,7 +60,9 @@ class PeerMediaUpdates : Object {
             }
         } else {
             let peerMediaUpdate = PeerMediaUpdates()
-            peerMediaUpdate.peerUpdateMap = NSKeyedArchiver.archivedDataWithRootObject([username:updateDate])
+            let dict = NSMutableDictionary()
+            dict.setValue(updateDate as NSDate, forKey: username)
+            peerMediaUpdate.peerUpdateMap = NSKeyedArchiver.archivedDataWithRootObject(dict)
             try! realm.write {
                 realm.add(peerMediaUpdate)
             }

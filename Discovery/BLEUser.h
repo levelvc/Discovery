@@ -28,7 +28,7 @@
 // rssi
 @property (nonatomic) float rssi;
 // proximity calculated by EasedValue class.
-@property (nonatomic, readonly) NSInteger proximity;
+@property (nonatomic) NSInteger proximity;
 //@property (nonatomic) NSInteger proximity;
 
 // the last seen time of the user
