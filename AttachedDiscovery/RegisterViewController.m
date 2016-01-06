@@ -101,7 +101,7 @@ APIRequestManager * requestManager;
     self.passwordField.delegate = self;
     self.passwordField.autocorrectionType = UITextAutocorrectionTypeNo;
     self.passwordField.returnKeyType = UIReturnKeyGo;
-    //self.usernameField.tag = 13;
+    self.usernameField.tag = 13;
     self.passwordField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     self.passwordField.keyboardAppearance = UIKeyboardAppearanceDark;
     [self.scrollView addSubview:self.passwordField];

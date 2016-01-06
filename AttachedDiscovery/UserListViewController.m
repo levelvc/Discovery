@@ -128,10 +128,11 @@ MediaGrabber *mediaGrabber;
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    
+    [SVProgressHUD dismiss];
     // pause, (it will disable timer and top scanning, but it will continue advertising)
     // this is important, otherwise due to the active timers your VC may not be deallocated.
     [self.discovery setPaused:YES];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -174,12 +175,12 @@ MediaGrabber *mediaGrabber;
         // Compare
         switch ([storedUpdate compare:currentUpdate]) {
             case NSOrderedSame:
-                newPhotos = YES;
-            default:
                 newPhotos = NO;
+            default:
+                newPhotos = YES;
         }
     }
-    [mediaGrabber updatePeerMediaUpdate:bleUser.username updateDate:currentUpdate];    
+    [mediaGrabber updatePeerMediaUpdate:bleUser.username updateDate:currentUpdate];
     
     cell.detailTextLabel.text = [NSString stringWithFormat:@"Proximity: %ld   New Photos: %@", (long)bleUser.proximity, newPhotos ? @"Yes" : @"No"];
     

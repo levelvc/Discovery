@@ -15,7 +15,7 @@ class LastPullDate : Object {
 }
 
 class PeerMediaUpdates : Object {
-    dynamic var peerUpdateMap : NSMutableDictionary? = nil
+    dynamic var peerUpdateMap : NSData? = nil
 }
 
 @objc protocol MediaGrabberDelegate {
@@ -43,7 +43,7 @@ class PeerMediaUpdates : Object {
         }
         
         // TESTING!!!!!!!!!!
-        //self.lastPullDate = NSDate(timeIntervalSinceNow:-(24 * 3600) as NSTimeInterval)
+        self.lastPullDate = NSDate(timeIntervalSinceNow:-(24 * 3600) as NSTimeInterval)
         
         print("Last media pull date:", self.lastPullDate)
     }
@@ -60,7 +60,7 @@ class PeerMediaUpdates : Object {
             }
         } else {
             let peerMediaUpdate = PeerMediaUpdates()
-            peerMediaUpdate.peerUpdateMap = [username:updateDate]
+            peerMediaUpdate.peerUpdateMap = NSKeyedArchiver.archivedDataWithRootObject([username:updateDate])
             try! realm.write {
                 realm.add(peerMediaUpdate)
             }
@@ -70,7 +70,8 @@ class PeerMediaUpdates : Object {
     func getPeerMediaUpdate(username:String) -> NSDate?{
         let realm = try! Realm()
         if let lastPeerMediaUpdates = realm.objects(PeerMediaUpdates).first {
-            if let map = lastPeerMediaUpdates.peerUpdateMap {
+            if let data = lastPeerMediaUpdates.peerUpdateMap {
+                let map = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! NSDictionary
                 return map[username] as? NSDate
             }
         }

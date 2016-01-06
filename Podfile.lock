@@ -21,6 +21,7 @@ PODS:
   - AFNetworking/UIKit (2.6.3):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - AsyncSwift (1.6.4)
   - EDColor (0.4.0)
   - Masonry (0.6.4)
   - Realm (0.97.0):
@@ -35,6 +36,7 @@ PODS:
 DEPENDENCIES:
   - AFDateHelper
   - AFNetworking (~> 2.0)
+  - AsyncSwift
   - EDColor (~> 0.4)
   - Masonry (~> 0.6)
   - RealmSwift
@@ -54,6 +56,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   AFDateHelper: 22d6439a3529a144c89b7e6aa214ebbe4d5c2337
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
+  AsyncSwift: 3c90beed237324f1b57e1f1c414dc5501985d208
   EDColor: 89d19a013279a5604d61650721c15f20fefaaf00
   Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
   Realm: b498a6fb9d288b171ff98d0e2d4384c295be8990

@@ -484,8 +484,11 @@
         if(array != nil) {
             NSLog(@"Dynamic value updated %@", array);
             BLEUser *bleUser = [self userWithPeripheralId:peripheral.identifier.UUIDString];
+            NSMutableArray *storeArray = [[NSMutableArray alloc] init];
+            [storeArray addObject:[NSDate dateFromISOString:array[0]]];
+            [storeArray addObject:array[1]];
             if(bleUser != nil) {
-                bleUser.dynamicArray = array;
+                bleUser.dynamicArray = storeArray;
                 [self.usersMap setObject:bleUser forKey:bleUser.peripheralId];
                 [self updateList];
             }

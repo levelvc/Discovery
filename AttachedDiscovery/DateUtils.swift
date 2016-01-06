@@ -8,9 +8,9 @@
 
 import Foundation
 
-extension NSDate {
+public extension NSDate {
     
-    func dateFromISOString(string: String) -> NSDate {
+    class func dateFromISOString(string: String) -> NSDate {
         let dateFormatter = NSDateFormatter()
         dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
         dateFormatter.timeZone = NSTimeZone.localTimeZone()

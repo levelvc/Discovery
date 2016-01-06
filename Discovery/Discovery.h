@@ -11,6 +11,7 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 #import <CoreLocation/CoreLocation.h>
 #import "BLEUser.h"
+#import "AttachedDiscovery-Swift.h"
 
 /** Start options */
 typedef NS_ENUM(NSInteger, DIStartOptions) {
