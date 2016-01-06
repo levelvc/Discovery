@@ -11,6 +11,7 @@
 @interface Discovery()
 @property (nonatomic, copy) void (^usersBlock)(NSArray *users, BOOL usersChanged);
 @property (strong, nonatomic) NSTimer *timer;
+@property (nonatomic) CBMutableCharacteristic *dynamicCharacteristic;
 @end
 
 @implementation Discovery
@@ -187,26 +188,49 @@
                                       CBAdvertisementDataServiceUUIDsKey:@[self.uuid]
                                       };
     
-    // create our characteristics
+    // ---------------------------------------------------
+    // Username characteristic
+    // ---------------------------------------------------
     CBMutableCharacteristic *characteristic =
     [[CBMutableCharacteristic alloc] initWithType:self.uuid
                                        properties:CBCharacteristicPropertyRead
                                             value:[self.username dataUsingEncoding:NSUTF8StringEncoding]
                                       permissions:CBAttributePermissionsReadable];
     
-    CBMutableCharacteristic *dynamicReadCharacteristic =
+    // ---------------------------------------------------
+    // Last Peripheral Photo Update time and count
+    // ---------------------------------------------------
+    self.dynamicCharacteristic =
     [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:@"8363BECA-88C4-4EFB-9CAB-6815562BCECD"]
+                                       properties:CBCharacteristicPropertyRead
+                                            value:nil
+                                      permissions:CBAttributePermissionsReadable];
+    
+    // ---------------------------------------------------
+    // Last Peripheral Photo Update time and count
+    // ---------------------------------------------------
+    /*
+    CBMutableCharacteristic *centralWriteCharacteristic =
+    [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:@"D1E22CBF-C242-46C7-AD08-9FE9CC78C873"]
                                        properties:CBCharacteristicPropertyWriteWithoutResponse
                                             value:nil
-                                      permissions:CBAttributePermissionsWriteable];
-    
-    
+                                      permissions:CBAttributePermissionsWriteable];*/
+
     // create the service with the characteristics
     CBMutableService *service = [[CBMutableService alloc] initWithType:self.uuid primary:YES];
-    service.characteristics = @[characteristic, dynamicReadCharacteristic];
+    service.characteristics = @[characteristic, self.dynamicCharacteristic];
     [self.peripheralManager addService:service];
     
     [self.peripheralManager startAdvertising:advertisingData];
+}
+
+- (void) updatePeripheralDynamicReadCharacteristic:(NSArray*)arr {
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:arr];
+    if(self.dynamicCharacteristic != nil) {
+        [self.peripheralManager updateValue:data forCharacteristic:self.dynamicCharacteristic onSubscribedCentrals:nil];
+        NSLog(@"Updated characteristic value: %@", arr);
+    }
+
 }
 
 - (void)startDetecting {
@@ -345,12 +369,19 @@
         bleUser.username = nil;
         bleUser.identified = NO;
         bleUser.peripheral.delegate = self;
+        bleUser.dynamicArray = nil;
         
+        /*
+        NSData *dynamicVal = [self.dynamicReadCharacteristic value];
+        if(dynamicVal != nil) {
+            NSArray *array = [NSKeyedUnarchiver unarchiveObjectWithData:dynamicVal];
+            bleUser.dynamicArray = array;
+        }*/
+    
         [self.usersMap setObject:bleUser forKey:bleUser.peripheralId];
     }
     
     //NSLog(@"BLUEUser is identified %d", bleUser.isIdentified);
-    
     if(!bleUser.isIdentified) {
         // We check if we can get the username from the advertisement data,
         // in case the advertising peer application is working at foreground
@@ -415,41 +446,48 @@
     if (!error) {
         // loop through to find our characteristic
         for (CBCharacteristic *characteristic in service.characteristics) {
-            if ([characteristic.UUID isEqual:self.uuid]) {
+            // This is the peripheral username characteristic
+            if([characteristic.UUID isEqual:self.uuid]) {
                 [peripheral readValueForCharacteristic:characteristic];
-                //[peripheral setNotifyValue:YES forCharacteristic:characteristic];
             }
-            if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:@"8363BECA-88C4-4EFB-9CAB-6815562BCECD"]]) {
+            // This is the peripheral last media update information
+            if([characteristic.UUID isEqual:[CBUUID UUIDWithString:@"8363BECA-88C4-4EFB-9CAB-6815562BCECD"]]) {
                 NSLog(@"Reading dynamic characteristic!");
-                //[peripheral readValueForCharacteristic:characteristic];
-                // TODO: Perhaps write the central's userid
-                [peripheral writeValue:[self.username dataUsingEncoding:NSUTF8StringEncoding]
-                                        forCharacteristic:characteristic type:CBCharacteristicWriteWithoutResponse];
-                
+                [peripheral setNotifyValue:YES forCharacteristic:characteristic];
             }
         }
     }
-    
 }
 
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
-    NSString *valueStr = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
-    NSLog(@"CBCharacteristic updated value: %@", valueStr);
-    
-    // if the value is not nil, we found our username!
-    if(valueStr != nil) {
-        BLEUser *user = [self userWithPeripheralId:peripheral.identifier.UUIDString];
-        user.username = valueStr;
-        user.identified = YES;
+    if([characteristic.UUID isEqual:self.uuid]) {
+        NSString *valueStr = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
+        NSLog(@"CBCharacteristic updated value: %@", valueStr);
         
-        [self updateList];
-        
-        // cancel the subscription to our characteristic
-        [peripheral setNotifyValue:NO forCharacteristic:characteristic];
-        
-        // and disconnect from the peripehral
-        [self.centralManager cancelPeripheralConnection:peripheral];
+        // if the value is not nil, we found our username!
+        if(valueStr != nil) {
+            BLEUser *user = [self userWithPeripheralId:peripheral.identifier.UUIDString];
+            user.username = valueStr;
+            user.identified = YES;
+            
+            [self updateList];
+            
+            // cancel the subscription to our characteristic
+            [peripheral setNotifyValue:NO forCharacteristic:characteristic];
+            
+            // and disconnect from the peripehral
+            [self.centralManager cancelPeripheralConnection:peripheral];
+        }
+    } else if([characteristic.UUID isEqual:[CBUUID UUIDWithString:@"8363BECA-88C4-4EFB-9CAB-6815562BCECD"]]) {
+        NSArray *array = [NSKeyedUnarchiver unarchiveObjectWithData:characteristic.value];
+        if(array != nil) {
+            NSLog(@"Dynamic value updated %@", array);
+            BLEUser *bleUser = [self userWithPeripheralId:peripheral.identifier.UUIDString];
+            if(bleUser != nil) {
+                bleUser.dynamicArray = array;
+            }
+        }
     }
 }
 

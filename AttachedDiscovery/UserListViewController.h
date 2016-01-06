@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 #import "AttachedDiscovery-Swift.h"
+#import <CoreLocation/CoreLocation.h>
+#import "Discovery.h"
 
-@interface UserListViewController : BaseViewController <UITableViewDataSource, UITableViewDelegate>
+@interface UserListViewController : BaseViewController <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, MediaGrabberDelegate>
 - (id)initWithUsername:(NSString *)username userId:(NSString*)userId;
 @end

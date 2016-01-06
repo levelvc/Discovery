@@ -10,8 +10,6 @@
 #import "BLEUser.h"
 #import "LLUtility.h"
 #import "Masonry.h"
-#import "Discovery.h"
-#import "AttachedDiscovery-Swift.h"
 
 #define UPDATE_INTERVAL 2.0f
 
@@ -21,12 +19,16 @@
 @property (strong, nonatomic) NSArray *users;
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) Discovery *discovery;
+@property (strong, nonatomic) NSMutableArray *locationQueue;
+@property (strong, nonatomic) NSNumber *locationQueueMaxSize;
 @end
 
 @implementation UserListViewController
 
 APIRequestManager * requestManager;
 User * user;
+CLLocationManager *locationManager;
+MediaGrabber *mediaGrabber;
 
 - (id)initWithUsername:(NSString *)username userId:(NSString*)userId
 {
@@ -41,6 +43,14 @@ User * user;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // Start location manager
+    locationManager = [[CLLocationManager alloc] init];
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    locationManager.delegate = self;//or whatever class you have for managing location
+    locationManager.pausesLocationUpdatesAutomatically = false;
+    [locationManager requestAlwaysAuthorization];
+    [locationManager startUpdatingLocation];
         
     requestManager = [[APIRequestManager alloc] initWithApi_key:@"ios_client" host_url:@"http://freestyle-lb-1747063986.us-east-1.elb.amazonaws.com:80"];
     
@@ -52,6 +62,7 @@ User * user;
         if(user != nil) {
             NSString *firstname = user.firstname;
             self.navigationItem.title = [firstname stringByAppendingString:@"'s Nearby People"];
+            self.userId = user.userId;
         } else {
             self.navigationItem.title = @"Nearby People";
         }
@@ -70,7 +81,8 @@ User * user;
     self.tableView.dataSource = self;
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.tableView.backgroundColor = [UIColor clearColor];
-    self.tableView.separatorColor = [UIColor whiteColor];
+    self.tableView.separatorColor = [[UIColor whiteColor] colorWithAlphaComponent:0];
+    
     if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
         [self.tableView setSeparatorInset:UIEdgeInsetsZero];
     }
@@ -94,6 +106,14 @@ User * user;
         weakSelf.users = users;
         [weakSelf.tableView reloadData];
     }];
+    
+    self.locationQueue = [[NSMutableArray alloc] init];
+    self.locationQueueMaxSize = [NSNumber numberWithInt:25];
+    
+    mediaGrabber = [[MediaGrabber alloc] init];
+    mediaGrabber.delegate = self;
+    [mediaGrabber startCheckingForMedia];
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -131,23 +151,26 @@ User * user;
     
     BLEUser *bleUser = [self.users objectAtIndex:indexPath.row];
     cell.textLabel.text = bleUser.username;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld", (long)bleUser.proximity];
+    int mediaCount = 0;
+    if(bleUser.dynamicArray != nil) {
+        mediaCount = (int)bleUser.dynamicArray[1];
+    }
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"Proximity: %ld   New Photos: %d", (long)bleUser.proximity, mediaCount];
     
     NSInteger proximity = bleUser.proximity;
     
     UIColor *bgColor;
     
-    
+    bgColor = [UIColor whiteColor];
     if (proximity < -85)
         // red
-        bgColor = [UIColor colorWithHexString:@"ED4A5E"];
+        bgColor = [bgColor colorWithAlphaComponent:0.3];
     else if (proximity < -65)
         // yellow
-        bgColor = [UIColor colorWithHexString:@"F6EC6E"];
+        bgColor = [bgColor colorWithAlphaComponent:0.4];
     else
         // green
-        bgColor = [UIColor colorWithHexString:@"B8E986"];
-        
+        bgColor = [bgColor colorWithAlphaComponent:0.5];
     
     if ([cell respondsToSelector:@selector(layoutMargins)]) {
         cell.layoutMargins = UIEdgeInsetsZero;
@@ -156,7 +179,22 @@ User * user;
     cell.backgroundColor = bgColor;
     cell.contentView.backgroundColor = [UIColor clearColor];
     
+    cell.textLabel.font = [UIFont fontWithName:@"AvenirNext-DemiBold" size:15.0f];
+    cell.textLabel.textColor = [UIColor whiteColor];
+    cell.detailTextLabel.font = [UIFont fontWithName:@"AvenirNext-Regular" size:10.0f];
+    cell.detailTextLabel.textColor = [UIColor whiteColor];
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"Row selected! %@", indexPath);
+    
+    BLEUser *bleUser = [self.users objectAtIndex:indexPath.row];
+    [LLUtility showAlertWithTitle:@"Your Friend is not Connected" andMessage:[NSString stringWithFormat:@"Would you like to send a connection notification to %@?", bleUser.username]];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -170,6 +208,40 @@ User * user;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
     NSLog(@"UserList is deallocated!");
+}
+
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    UIApplicationState state = [[UIApplication sharedApplication] applicationState];
+    if (state == UIApplicationStateBackground || state == UIApplicationStateInactive)
+    {
+        // Update the media
+        [mediaGrabber updateMedia];
+        
+        //TODO: Update location, with queuing
+        if(self.locationQueue.count <= self.locationQueueMaxSize.intValue) {
+            [self.locationQueue addObjectsFromArray:[requestManager getLocationUpdate:locations]];
+        } else {
+            NSLog(@"Sending locations to server %d", (int)self.locationQueue.count);
+            // post to server
+            [requestManager postLocations:self.locationQueue success:^(void){
+                NSLog(@"Locations posted successfully");
+            } failure:^(NSError *error){
+                NSLog(@"Locations failed to post");
+            }];
+            [self.locationQueue removeAllObjects];
+        }
+    }
+}
+
+-(void) didReceiveMediaUpdate:(NSArray*)photoAssets latestDate:(NSDate*)latestDate totalPhotoAssets:(NSInteger)totalPhotoAssets {
+    NSLog(@"Received new media update: %d", (int)totalPhotoAssets);
+    NSArray *mediaArray = @[latestDate.formattedISO8601, @(totalPhotoAssets)];
+    [self.discovery updatePeripheralDynamicReadCharacteristic:mediaArray];
+}
+
+// Lookup the last timestamp for the peer
+- (NSDate*) getPeripheralDynamicCharacteristicArray:(NSString*)username {
+    return nil;
 }
 
 @end

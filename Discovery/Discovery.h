@@ -35,6 +35,9 @@ typedef NS_ENUM(NSInteger, DIStartOptions) {
                 startOption:(DIStartOptions)startOption
                   usersBlock:(void (^)(NSArray *users, BOOL usersChanged))usersBlock;
 
+/** Update the characteristic data **/
+- (void) updatePeripheralDynamicReadCharacteristic:(NSArray*)arr;
+
 
 /**
  * Initialize the Discovery object with a UUID specific to your app, and a username specific to your device.

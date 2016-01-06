@@ -12,6 +12,8 @@
 		042979401C3B0EAB0016DC40 /* Brown - Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0429793D1C3B0EAB0016DC40 /* Brown - Regular.otf */; };
 		042979461C3B1FA50016DC40 /* APIRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042979451C3B1FA50016DC40 /* APIRequestManager.swift */; };
 		042979481C3B21780016DC40 /* HMACAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042979471C3B21780016DC40 /* HMACAuthentication.swift */; };
+		046011EA1C3C5C03002E3A50 /* MediaGrabber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046011E91C3C5C03002E3A50 /* MediaGrabber.swift */; };
+		046011ED1C3C7B1C002E3A50 /* DateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046011EC1C3C7B1C002E3A50 /* DateUtils.swift */; };
 		17B568861A87864B007E0C5F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 17B568851A87864B007E0C5F /* main.m */; };
 		17B568891A87864B007E0C5F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 17B568881A87864B007E0C5F /* AppDelegate.m */; };
 		17B568911A87864B007E0C5F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17B568901A87864B007E0C5F /* Images.xcassets */; };
@@ -46,6 +48,8 @@
 		042979441C3B1FA40016DC40 /* DiscoveryExample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DiscoveryExample-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		042979451C3B1FA50016DC40 /* APIRequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIRequestManager.swift; sourceTree = "<group>"; };
 		042979471C3B21780016DC40 /* HMACAuthentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HMACAuthentication.swift; sourceTree = "<group>"; };
+		046011E91C3C5C03002E3A50 /* MediaGrabber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaGrabber.swift; sourceTree = "<group>"; };
+		046011EC1C3C7B1C002E3A50 /* DateUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateUtils.swift; sourceTree = "<group>"; };
 		17B568801A87864B007E0C5F /* AttachedDiscovery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AttachedDiscovery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17B568841A87864B007E0C5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		17B568851A87864B007E0C5F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -132,14 +136,23 @@
 			name = Authentication;
 			sourceTree = "<group>";
 		};
+		046011E81C3C5BFA002E3A50 /* Media */ = {
+			isa = PBXGroup;
+			children = (
+				046011E91C3C5C03002E3A50 /* MediaGrabber.swift */,
+			);
+			name = Media;
+			sourceTree = "<group>";
+		};
 		17B568771A87864B007E0C5F = {
 			isa = PBXGroup;
 			children = (
+				046011E81C3C5BFA002E3A50 /* Media */,
 				042979491C3B217C0016DC40 /* Authentication */,
 				042979441C3B1FA40016DC40 /* DiscoveryExample-Bridging-Header.h */,
 				042979431C3B1F980016DC40 /* API */,
 				9DC3B4FC1A9E0FCF00B1603B /* Discovery */,
-				17B568821A87864B007E0C5F /* DiscoveryExample */,
+				17B568821A87864B007E0C5F /* AttachedDiscovery */,
 				042979391C3B0E6B0016DC40 /* Resources */,
 				17B5689C1A87864B007E0C5F /* DiscoveryExampleTests */,
 				17B568811A87864B007E0C5F /* Products */,
@@ -157,7 +170,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		17B568821A87864B007E0C5F /* DiscoveryExample */ = {
+		17B568821A87864B007E0C5F /* AttachedDiscovery */ = {
 			isa = PBXGroup;
 			children = (
 				17C70CB21A878EA200723200 /* Utils */,
@@ -168,7 +181,7 @@
 				17B568921A87864B007E0C5F /* LaunchScreen.xib */,
 				17B568831A87864B007E0C5F /* Supporting Files */,
 			);
-			path = DiscoveryExample;
+			path = AttachedDiscovery;
 			sourceTree = "<group>";
 		};
 		17B568831A87864B007E0C5F /* Supporting Files */ = {
@@ -213,6 +226,7 @@
 		17C70CB21A878EA200723200 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				046011EC1C3C7B1C002E3A50 /* DateUtils.swift */,
 				17C70CB31A878EBD00723200 /* LLUtility.h */,
 				17C70CB41A878EBD00723200 /* LLUtility.m */,
 				17C70CB51A878EBD00723200 /* PlainTextField.h */,
@@ -302,7 +316,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0610;
-				ORGANIZATIONNAME = "Ömer Faruk Gül";
+				ORGANIZATIONNAME = "Attached Inc.";
 				TargetAttributes = {
 					17B5687F1A87864B007E0C5F = {
 						CreatedOnToolsVersion = 6.1;
@@ -415,11 +429,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				042979461C3B1FA50016DC40 /* APIRequestManager.swift in Sources */,
+				046011EA1C3C5C03002E3A50 /* MediaGrabber.swift in Sources */,
 				17C70CBA1A878EBD00723200 /* PlainTextField.m in Sources */,
 				17C70CCF1A87918300723200 /* UserListViewController.m in Sources */,
 				17B568891A87864B007E0C5F /* AppDelegate.m in Sources */,
 				17B568861A87864B007E0C5F /* main.m in Sources */,
 				9DC3B5051A9E0FD000B1603B /* Discovery.m in Sources */,
+				046011ED1C3C7B1C002E3A50 /* DateUtils.swift in Sources */,
 				17C70CB91A878EBD00723200 /* LLUtility.m in Sources */,
 				17C70CBB1A878EBD00723200 /* LLControl.m in Sources */,
 				17C70CE31A8811A000723200 /* BaseViewController.m in Sources */,
@@ -497,6 +513,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = AttachedDiscovery;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -532,6 +549,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = AttachedDiscovery;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -546,9 +564,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = DiscoveryExample/Info.plist;
+				INFOPLIST_FILE = AttachedDiscovery/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.attached.AttachedDiscovery;
 				PRODUCT_NAME = AttachedDiscovery;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "DiscoveryExample-Bridging-Header.h";
@@ -564,9 +583,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = DiscoveryExample/Info.plist;
+				INFOPLIST_FILE = AttachedDiscovery/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.attached.AttachedDiscovery;
 				PRODUCT_NAME = AttachedDiscovery;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "DiscoveryExample-Bridging-Header.h";

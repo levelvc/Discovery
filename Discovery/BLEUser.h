@@ -23,10 +23,13 @@
 // indicates wheather the user's username is extracted from the peer device.
 @property (nonatomic, getter=isIdentified) BOOL identified;
 
+@property (strong, nonatomic) NSArray *dynamicArray;
+
 // rssi
 @property (nonatomic) float rssi;
 // proximity calculated by EasedValue class.
 @property (nonatomic, readonly) NSInteger proximity;
+//@property (nonatomic) NSInteger proximity;
 
 // the last seen time of the user
 @property (nonatomic) double updateTime;

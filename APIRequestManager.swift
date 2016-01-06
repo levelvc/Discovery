@@ -84,10 +84,40 @@ class User : Object {
             failure: {(operation: AFHTTPRequestOperation?, error: NSError!) in
                 print("Error: " + error!.description)
                 dispatch_semaphore_signal(semaphore)
+                userId = nil
         })
         dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
-        print("userId", userId)
         return userId!;
+    }
+    
+    func getLocationUpdate(locations:[CLLocation]) -> [NSMutableDictionary] {
+        var locationUpdates : [NSMutableDictionary] = []
+        for location in locations {
+            let locationUpdate : NSMutableDictionary = [
+                //"description":newLocation.description, //TODO: Need a textual name for this place...
+                "user_id":self.user_id,
+                "lat":location.coordinate.latitude,
+                "lng":location.coordinate.longitude,
+                "altitude":location.altitude,
+                "horizontal_accuracy":location.horizontalAccuracy,
+                "vertical_accuracy":location.verticalAccuracy,
+                "timestamp":location.timestamp.toString(format: .ISO8601(ISO8601Format.DateTimeMilliSec)),
+                "speed":location.speed,
+                "course":location.course
+            ]
+            
+            if location.floor != nil {
+                locationUpdate.setValue(location.floor!.level, forKey: "floor")
+            }
+            
+            locationUpdates.append(locationUpdate)
+        }
+        return locationUpdates
+    }
+    
+    func postLocations(locationUpdates:[NSMutableDictionary], success:(() -> Void), failure:((error: NSError!) -> Void)) {
+        let data = JSON(locationUpdates)
+        self.post(data, path: "/users/self/location", success:success, failure: failure)
     }
     
     func postMedia(photos:[(String, PHAsset)], success:(() -> Void), failure:((error: NSError!) -> Void)){

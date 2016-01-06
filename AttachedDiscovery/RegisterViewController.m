@@ -141,12 +141,12 @@ APIRequestManager * requestManager;
     NSString *password = self.passwordField.text;
     
     if(username.length == 0) {
-        [LLUtility showAlertWithTitle:@"Erro" andMessage:@"Username cannot be blank."];
+        [LLUtility showAlertWithTitle:@"Error" andMessage:@"Username cannot be blank."];
         return;
     }
     
     if(password.length == 0) {
-        [LLUtility showAlertWithTitle:@"Erro" andMessage:@"Password cannot be blank."];
+        [LLUtility showAlertWithTitle:@"Error" andMessage:@"Password cannot be blank."];
         return;
     }
     
