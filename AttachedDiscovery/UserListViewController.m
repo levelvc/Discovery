@@ -16,7 +16,7 @@
 @interface UserListViewController ()
 @property (strong, nonatomic) NSString *username;
 @property (strong, nonatomic) NSString *userId;
-@property (strong, nonatomic) NSArray *users;
+@property (strong, nonatomic) NSArray *connectedUsers;
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) Discovery *discovery;
 @property (strong, nonatomic) NSMutableArray *locationQueue;
@@ -70,7 +70,7 @@ MediaGrabber *mediaGrabber;
 	
     [self addGradientBgLayer:@[[UIColor colorWithHexString:@"C93BDF"], [UIColor colorWithHexString:@"2A62E1"]]];
     
-    self.users = [NSArray array];
+    //self.connectedUsers = [NSArray array];
     
     UIView *superview = self.view;
     
@@ -107,9 +107,9 @@ MediaGrabber *mediaGrabber;
     [SVProgressHUD showWithStatus:@"Scanning for Peers"];
     self.discovery = [[Discovery alloc] initWithUUID:uuid username:self.username usersBlock:^(NSArray *users, BOOL usersChanged) {        
         NSLog(@"Updating table view with users count : %lu %@", (unsigned long)users.count, users);
-        weakSelf.users = users;
+        weakSelf.connectedUsers = users;
         [weakSelf.tableView reloadData];
-        if(weakSelf.users.count > 0) {
+        if(weakSelf.connectedUsers.count > 0) {
             [SVProgressHUD dismiss];
         } else {
             if(![SVProgressHUD isVisible]) {
@@ -124,7 +124,10 @@ MediaGrabber *mediaGrabber;
     mediaGrabber = [[MediaGrabber alloc] init];
     mediaGrabber.delegate = self;
     [mediaGrabber startCheckingForMedia];
-
+    
+    //BLEUser *u = [[BLEUser alloc] initWithPerpipheral:nil];
+    //u.username = @"kevin";
+    //self.connectedUsers = @[u];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -148,7 +151,7 @@ MediaGrabber *mediaGrabber;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.users.count;
+    return self.connectedUsers.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -162,7 +165,7 @@ MediaGrabber *mediaGrabber;
     }
     
     // TODO: Change this to compare old date with new date
-    BLEUser *bleUser = [self.users objectAtIndex:indexPath.row];
+    BLEUser *bleUser = [self.connectedUsers objectAtIndex:indexPath.row];
     cell.textLabel.text = bleUser.username;
     
     NSDate *storedUpdate = [mediaGrabber getPeerMediaUpdate:bleUser.username];
@@ -220,7 +223,7 @@ MediaGrabber *mediaGrabber;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"Row selected! %@", indexPath);
     
-    BLEUser *bleUser = [self.users objectAtIndex:indexPath.row];
+    BLEUser *bleUser = [self.connectedUsers objectAtIndex:indexPath.row];
     //[LLUtility showAlertWithTitle:@"Your Friend is not Connected" andMessage:[NSString stringWithFormat:@"Would you like to send a connection notification to %@?", bleUser.username]];
     
     PeerConnectionViewController *vc = [[PeerConnectionViewController alloc] initWithPeerUsername:bleUser.username];
