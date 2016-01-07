@@ -25,8 +25,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationItem.title = self.peerUsername;    
-    [self addGradientBgLayer:@[[UIColor colorWithHexString:@"C93BDF"], [UIColor colorWithHexString:@"2A62E1"]]];
+    self.navigationItem.title = self.peerUsername;
+    [self addGradientBgLayer:@[[UIColor colorWithHexString:@"4ED8F5"], [UIColor colorWithHexString:@"6C2CFA"]]];
 }
 
 @end

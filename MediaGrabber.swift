@@ -51,11 +51,12 @@ class PeerMediaUpdates : Object {
     func updatePeerMediaUpdate(username:String, updateDate:NSDate) {
         let realm = try! Realm()
         if let lastPeerMediaUpdates = realm.objects(PeerMediaUpdates).first {
-            let map = lastPeerMediaUpdates.peerUpdateMap
-            if(map != nil) {
-                map?.setValue(updateDate, forKey: username)
+            let data = lastPeerMediaUpdates.peerUpdateMap
+            if(data != nil) {
+                let dict = NSKeyedUnarchiver.unarchiveObjectWithData(data!) as! NSDictionary
+                dict.setValue(updateDate, forKey: username)
                 try! realm.write {
-                    lastPeerMediaUpdates.peerUpdateMap = map
+                    lastPeerMediaUpdates.peerUpdateMap = NSKeyedArchiver.archivedDataWithRootObject(dict)
                 }
             }
         } else {

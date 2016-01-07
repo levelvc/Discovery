@@ -112,9 +112,18 @@ MediaGrabber *mediaGrabber;
         if(weakSelf.connectedUsers.count > 0) {
             [SVProgressHUD dismiss];
         } else {
+            //----- [TESTING ONLY] -----
+            BLEUser *u = [[BLEUser alloc] initWithPerpipheral:nil];
+            u.username = @"kevin";
+            weakSelf.connectedUsers = @[u];
+            [weakSelf.tableView reloadData];
+            [SVProgressHUD dismiss];
+            //--------------------------
+            
+            /*
             if(![SVProgressHUD isVisible]) {
                 [SVProgressHUD showWithStatus:@"Scanning for Peers"];
-            }
+            }*/
         }
     }];
     
@@ -124,10 +133,7 @@ MediaGrabber *mediaGrabber;
     mediaGrabber = [[MediaGrabber alloc] init];
     mediaGrabber.delegate = self;
     [mediaGrabber startCheckingForMedia];
-    
-    //BLEUser *u = [[BLEUser alloc] initWithPerpipheral:nil];
-    //u.username = @"kevin";
-    //self.connectedUsers = @[u];
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
