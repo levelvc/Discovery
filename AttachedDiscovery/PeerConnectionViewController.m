@@ -77,7 +77,7 @@ MediaGrabber *mediaGrabber;
             [SVProgressHUD dismiss];
             // send last update date
             NSDate *peerLastMediaUpdateDate = [mediaGrabber getPeerMediaUpdate:self.peerUsername];
-            [self.peerServiceManager sendLastMediaDate:peerLastMediaUpdateDate];
+            [self.peerServiceManager sendLastMediaDate:peerLastMediaUpdateDate peerId:self.peerUsername];
         }
     }
 }
@@ -88,18 +88,23 @@ MediaGrabber *mediaGrabber;
     if(event[@"event"] != nil) {
         int eventType = (int)event[@"event"];
         NSString *timestamp = (NSString*)event[@"timestamp"];
-        NSDate *updateDate = [NSDate dateFromISOString:timestamp];
-        switch (eventType) {
-            case PeerServiceManagerEventTypesEVENT_LAST_MEDIA_DATE:
-                NSLog(@"Received lastMediaUpdate date from peer");
-                NSArray *assets = [mediaGrabber getPhotosAfterDate_objcAfterTheDate:updateDate];
-                if(assets.count > 0) {
-                    NSArray *images = [mediaGrabber getImageForAssets:assets];
-                    //Now send images
+        if(eventType == PeerServiceManagerEventTypesEVENT_LAST_MEDIA_DATE) {
+            NSDate *updateDate = [NSDate dateFromISOString:timestamp];
+            NSLog(@"Received lastMediaUpdate date from peer");
+            NSArray *assets = [mediaGrabber getPhotosAfterDate_objcAfterTheDate:updateDate];
+            if(assets.count > 0) {
+                NSArray *images = [mediaGrabber getImageForAssets:assets];
+                //Now send images
+                for(UIImage *image in images) {
+                    [self.peerServiceManager sendImage:image peerId:self.peerUsername];
                 }
+            }
+        }
+        else if (eventType == PeerServiceManagerEventTypesEVENT_IMAGE) {
+            //Received image, do something with interface
+            NSLog(@"Received Image");
         }
     }
-    
 }
 
 - (void)peerDiscovered:(PeerServiceManager * __nonnull)manager peerId:(MCPeerID * __nonnull)peerId withDiscoveryInfo:(NSDictionary<NSString *, NSString *> * __nullable)withDiscoveryInfo timestamp:(NSDate * __nonnull)timestamp {

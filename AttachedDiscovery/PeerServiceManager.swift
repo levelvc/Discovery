@@ -11,6 +11,7 @@ import MultipeerConnectivity
 
 @objc enum PeerServiceManagerEventTypes:Int {
     case EVENT_LAST_MEDIA_DATE = 0
+    case EVENT_IMAGE = 1
 }
 
 @objc protocol PeerServiceManagerDelegate {
@@ -117,13 +118,38 @@ import MultipeerConnectivity
 
     }
     
-    func sendLastMediaDate(lastMediaDate:NSDate) {
+    func sendImage(image : UIImage, peerId:String) {
+        if session.connectedPeers.count > 0 {
+            let data = UIImagePNGRepresentation(image);
+            var error : NSError?
+            do {
+                let dict = ["event":PeerServiceManagerEventTypes.EVENT_IMAGE.rawValue, "data":data!]
+                let data = NSKeyedArchiver.archivedDataWithRootObject(dict)
+                let mcPeerId = session.connectedPeers.filter{(peerId) in
+                    peerId.displayName == peerId
+                }.first
+                if(mcPeerId != nil) {
+                    try self.session.sendData(data, toPeers: [mcPeerId!], withMode: MCSessionSendDataMode.Reliable)
+                }
+            } catch let error1 as NSError {
+                error = error1
+                NSLog("%@", "\(error)")
+            }
+        }
+    }
+    
+    func sendLastMediaDate(lastMediaDate:NSDate, peerId:String) {
         if session.connectedPeers.count > 0 {
             var error : NSError?
             do {
                 let dict = ["event":PeerServiceManagerEventTypes.EVENT_LAST_MEDIA_DATE.rawValue, "timestamp":lastMediaDate.formattedISO8601]
                 let data = NSKeyedArchiver.archivedDataWithRootObject(dict)
-                try self.session.sendData(data, toPeers: session.connectedPeers, withMode: MCSessionSendDataMode.Reliable)
+                let mcPeerId = session.connectedPeers.filter{(peerId) in
+                    peerId.displayName == peerId
+                    }.first
+                if(mcPeerId != nil) {
+                    try self.session.sendData(data, toPeers: session.connectedPeers, withMode: MCSessionSendDataMode.Reliable)
+                }                
             } catch let error1 as NSError {
                 error = error1
                 NSLog("%@", "\(error)")
