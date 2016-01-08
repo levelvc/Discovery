@@ -231,10 +231,8 @@ MediaGrabber *mediaGrabber;
     
     BLEUser *bleUser = [self.connectedUsers objectAtIndex:indexPath.row];
     //[LLUtility showAlertWithTitle:@"Your Friend is not Connected" andMessage:[NSString stringWithFormat:@"Would you like to send a connection notification to %@?", bleUser.username]];
-    
-    PeerConnectionViewController *vc = [[PeerConnectionViewController alloc] initWithPeerUsername:bleUser.username];
+    PeerConnectionViewController *vc = [[PeerConnectionViewController alloc] initWithUsername:self.username peerUsername:bleUser.username];
     [self.navigationController pushViewController:vc animated:YES];
-
 }
 
 - (void)didReceiveMemoryWarning
@@ -275,7 +273,7 @@ MediaGrabber *mediaGrabber;
 
 -(void) didReceiveMediaUpdate:(NSArray*)photoAssets latestDate:(NSDate*)latestDate totalPhotoAssets:(NSInteger)totalPhotoAssets {
     NSLog(@"Received new media update: %d", (int)totalPhotoAssets);
-    NSArray *mediaArray = @[latestDate.formattedISO8601, @(totalPhotoAssets)];
+    NSArray *mediaArray = @[latestDate.formattedISO8601, @(totalPhotoAssets)];    
     // This is where you broadcast your new photos
     [self.discovery updatePeripheralDynamicReadCharacteristic:mediaArray];
 }

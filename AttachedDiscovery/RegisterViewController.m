@@ -111,9 +111,7 @@ APIRequestManager * requestManager;
         make.width.equalTo(self.scrollView);
         make.height.equalTo(@70);
         make.top.equalTo(self.usernameField.mas_bottom).with.offset(10);
-    }];
-    
-    
+    }];        
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle{

@@ -113,6 +113,41 @@ class PeerMediaUpdates : Object {
         }
     }
     
+    func getImageForAssets(assets:NSArray) -> NSArray {
+        /* For faster performance, and maybe degraded image */
+        let options = PHImageRequestOptions()
+        options.deliveryMode = .FastFormat
+        options.synchronous = true
+        
+        let images = NSMutableArray()
+        
+        for o in assets {
+            let asset = o as! PHAsset
+            //TODO: Fix this
+            let imageSize = CGSize(width: asset.pixelWidth, height: asset.pixelHeight)
+            self.imgManager.requestImageForAsset(asset,
+                targetSize: imageSize,
+                contentMode: .AspectFill,
+                options: options,
+                resultHandler: {
+                    image, info in
+                    //print(info)
+                    //print(asset.creationDate)
+                    images.addObject(image!)
+                }
+            )
+        }
+        return images
+    }
+    
+    func getPhotosAfterDate_objc(afterTheDate date:NSDate) -> NSArray {
+        let retArray = NSMutableArray()
+        getPhotosAfterDate(afterTheDate: date).map{(assetId, asset) in
+            retArray.addObject(asset)
+        }
+        return retArray
+    }
+    
     func getPhotosAfterDate(afterTheDate date:NSDate) -> [(String, PHAsset)] {
         let fetchOptions = PHFetchOptions()
         var photos : [String:PHAsset] = [:]
@@ -130,26 +165,7 @@ class PeerMediaUpdates : Object {
                     
                     if object is PHAsset{
                         let asset = object as! PHAsset
-                        //let imageSize = CGSize(width: asset.pixelWidth, height: asset.pixelHeight)
-                        
-                        /* For faster performance, and maybe degraded image */
-                        let options = PHImageRequestOptions()
-                        options.deliveryMode = .FastFormat
-                        options.synchronous = true
-                        
-                        photos[asset.localIdentifier] = asset                        
-                        /*
-                        self.imgManager.requestImageForAsset(asset,
-                            targetSize: imageSize,
-                            contentMode: .AspectFill,
-                            options: options,
-                            resultHandler: {
-                                image, info in
-                                //print(info)
-                                //print(asset.creationDate)
-                                photos[asset.localIdentifier] = asset
-                            }
-                        )*/
+                        photos[asset.localIdentifier] = asset
                     }
                 }
             }

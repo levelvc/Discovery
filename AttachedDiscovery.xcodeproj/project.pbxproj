@@ -155,11 +155,13 @@
 				046011F81C3DCB59002E3A50 /* PeerServiceManager.swift */,
 			);
 			name = Multipeer;
+			path = AttachedDiscovery;
 			sourceTree = "<group>";
 		};
 		17B568771A87864B007E0C5F = {
 			isa = PBXGroup;
 			children = (
+				046011F71C3DCB4D002E3A50 /* Multipeer */,
 				046011E81C3C5BFA002E3A50 /* Media */,
 				042979491C3B217C0016DC40 /* Authentication */,
 				042979441C3B1FA40016DC40 /* DiscoveryExample-Bridging-Header.h */,
@@ -186,7 +188,6 @@
 		17B568821A87864B007E0C5F /* AttachedDiscovery */ = {
 			isa = PBXGroup;
 			children = (
-				046011F71C3DCB4D002E3A50 /* Multipeer */,
 				17C70CB21A878EA200723200 /* Utils */,
 				17B568AD1A87885A007E0C5F /* Controllers */,
 				17B568871A87864B007E0C5F /* AppDelegate.h */,

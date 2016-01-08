@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
+#import "AttachedDiscovery-Swift.h"
+#import "SVProgressHUD.h"
 
-@interface PeerConnectionViewController : BaseViewController
-- (id)initWithPeerUsername:(NSString *)username;
+@interface PeerConnectionViewController : BaseViewController <PeerServiceManagerDelegate>
+- (id)initWithUsername:(NSString *)userName peerUsername:(NSString*)peerUsername;
 @end
