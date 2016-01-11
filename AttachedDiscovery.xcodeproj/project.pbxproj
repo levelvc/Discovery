@@ -107,6 +107,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04161ED71C43463500891AB0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		042979391C3B0E6B0016DC40 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -188,6 +195,7 @@
 		17B568821A87864B007E0C5F /* AttachedDiscovery */ = {
 			isa = PBXGroup;
 			children = (
+				04161ED71C43463500891AB0 /* Views */,
 				17C70CB21A878EA200723200 /* Utils */,
 				17B568AD1A87885A007E0C5F /* Controllers */,
 				17B568871A87864B007E0C5F /* AppDelegate.h */,

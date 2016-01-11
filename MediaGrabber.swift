@@ -102,10 +102,16 @@ class PeerMediaUpdates : Object {
                     self.delegate.didReceiveMediaUpdate(sendAssets, latestDate: lastDate, totalPhotoAssets: assets.count)
                     if(self.persistDate) {
                         let realm = try! Realm()
-                        let lastPullDateObject = LastPullDate()
-                        lastPullDateObject.lastDate = lastDate
-                        try! realm.write {
-                            realm.add(lastPullDateObject)
+                        if let last_pull = realm.objects(LastPullDate).first {
+                            try! realm.write {
+                                last_pull.lastDate = lastDate
+                            }
+                        } else {
+                            let lastPullDateObject = LastPullDate()
+                            lastPullDateObject.lastDate = lastDate
+                            try! realm.write {
+                                realm.add(lastPullDateObject)
+                            }
                         }
                     }
                 }
@@ -142,7 +148,7 @@ class PeerMediaUpdates : Object {
     
     func getPhotosAfterDate_objc(afterTheDate date:NSDate) -> NSArray {
         let retArray = NSMutableArray()
-        getPhotosAfterDate(afterTheDate: date).map{(assetId, asset) in
+        getPhotosAfterDate(afterTheDate: date).forEach{(assetId, asset) in
             retArray.addObject(asset)
         }
         return retArray

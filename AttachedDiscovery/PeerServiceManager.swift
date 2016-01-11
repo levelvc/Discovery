@@ -101,22 +101,6 @@ import MultipeerConnectivity
         session.delegate = self
         return session
     }()
-
-    func sendColor(colorName : String) {
-        //NSData *imageData = UIImagePNGRepresentation(image);
-        NSLog("%@", "sendColor: \(colorName)")
-        
-        if session.connectedPeers.count > 0 {
-            var error : NSError?
-            do {
-                try self.session.sendData(colorName.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, toPeers: session.connectedPeers, withMode: MCSessionSendDataMode.Reliable)
-            } catch let error1 as NSError {
-                error = error1
-                NSLog("%@", "\(error)")
-            }
-        }
-
-    }
     
     func sendImage(image : UIImage, peerId:String) {
         if session.connectedPeers.count > 0 {

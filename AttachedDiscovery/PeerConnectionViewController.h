@@ -11,6 +11,6 @@
 #import "AttachedDiscovery-Swift.h"
 #import "SVProgressHUD.h"
 
-@interface PeerConnectionViewController : BaseViewController <PeerServiceManagerDelegate>
+@interface PeerConnectionViewController : BaseViewController <PeerServiceManagerDelegate, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource>
 - (id)initWithUsername:(NSString *)userName peerUsername:(NSString*)peerUsername;
 @end
